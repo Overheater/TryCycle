@@ -2,10 +2,23 @@ import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
-import {TabNavigator,TabBarBottom, StackNavigator,NavigationActionStatusBar,navigationOptions } from 'react-navigation';
+import {
+  Body,
+  Button,
+  Container,
+  Content,
+  Footer,
+  FooterTab,
+  Header,
+  Icon,
+  Left,
+  Right,
+  Title,
+  Text
+} from 'native-base';
+import {TabNavigator,TabBarBottom, StackNavigator,NavigationActionStatusBar,navigationOptions,NavigationAction } from 'react-navigation';
 import Styles from '../styles/Styles';
 
 const instructions = Platform.select({
@@ -22,14 +35,22 @@ export default class Welcome extends Component<> {
       };
   render() {
     return (
-      <View style={Styles.container}>
+      <Container>
+
+      <Content>
       <Text>
         Welcome to  Trycycle!
       </Text>
       <Text>
         Please select one of the trip types below to start journaling.
       </Text>
-      </View>
+      <Button  large
+            onPress={() =>this.props.navigation.navigate('TripChaining')}
+          >
+            <Text style={{color:"white"}}>Trip Chaining</Text>
+          </Button>         
+      </Content>
+      </Container>
     );
   }
 }

@@ -24,31 +24,29 @@ const instructions = Platform.select({
 });
 
 
-export default class Addactivity extends Component<> {
-  static navigationOptions = {
-    title: 'New Entry',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },};
+export default class TripChaining extends Component<> {
+    static navigationOptions = {
+        title: 'TripChaining',
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      };
   render() {
     return (
         <Container>
-        <Header>
-          <Left>
-          <Button transparent
-          onPress={() => this.props.navigation.navigate('DrawerOpen')}
-          >
-              <Icon name='menu' />
-              
-            </Button>
-          </Left>
-          <Body>
-            <Title>Add a trip</Title>
-          </Body>
-        </Header>
         <Form>
             <Item inlineLabel>
               <Label>Trip Name</Label>
+              <Input />
+            </Item>
+            </Form>
+            <Form>
+            <Item inlineLabel>
+              <Label>Description</Label>
               <Input />
             </Item>
             </Form>
@@ -56,6 +54,3 @@ export default class Addactivity extends Component<> {
     );
   }
 }
-
-
-

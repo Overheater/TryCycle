@@ -6,14 +6,33 @@ import {
 } from 'react-native';
 import { DrawerNavigator, StackNavigator,TabBarBottom, TabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Addactivity from './addactivity'
-import Twoweeks from './twoweeks'
-import Welcome from './Welcome';
-export const Tabs= TabNavigator({
-  Home:{screen: Welcome},
-  Journal: { screen: Twoweeks},
-  NewTrip: {screen: Addactivity}
 
+import Twoweeks from './twoweeks';
+import Welcome from './Welcome';
+import AddATransport from './addAtransport';
+import AddPTransport from './addPtransport';
+import AddCarpool from './addCarpool';
+import AddTripChaining from './addTripChaining';
+const HomePage = StackNavigator({
+  Home: {
+      screen: Welcome
+  },
+  ATransport:{
+    screen:AddATransport
+  },
+  PTransport: {
+      screen: AddPTransport
+  },
+  Carpool: {
+      screen: AddCarpool
+  },
+  TripChaining: {
+    screen: AddTripChaining
+  },
+})
+export const Tabs= TabNavigator({
+  Home:{screen: HomePage},
+  Journal: { screen: Twoweeks},
 },  {
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
@@ -23,12 +42,8 @@ export const Tabs= TabNavigator({
         iconName = `md-bookmarks`;
       } else if (routeName === 'Home') {
         iconName = `ios-home`;
-      } else if (routeName === 'NewTrip') {
-        iconName = `md-add`;
-      }
+      } 
 
-      // You can return any component that you like here! We usually use an
-      // icon component from react-native-vector-icons
       return <Ionicons name={iconName} size={25} color={tintColor} />;
     },
   }),
@@ -47,8 +62,3 @@ export const Tabs= TabNavigator({
   swipeEnabled: true,
 }
 );
-export const Drawer = DrawerNavigator({
-    LastTwoWeeks: { screen: Twoweeks },
-    Addactivity: { screen: Addactivity },
-  },
-)
