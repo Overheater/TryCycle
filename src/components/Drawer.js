@@ -19,10 +19,12 @@ export const Tabs= TabNavigator({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
-      if (routeName === 'Discover') {
-        iconName = `md-paper`;
-      } else if (routeName === 'Search') {
-        iconName = `ios-search`;
+      if (routeName === 'Journal') {
+        iconName = `md-bookmarks`;
+      } else if (routeName === 'Home') {
+        iconName = `ios-home`;
+      } else if (routeName === 'NewTrip') {
+        iconName = `md-add`;
       }
 
       // You can return any component that you like here! We usually use an
@@ -31,10 +33,14 @@ export const Tabs= TabNavigator({
     },
   }),
   tabBarOptions: {
-    activeTintColor: 'tomato',
-    inactiveTintColor: '#FFF1D3',
+    activeTintColor: '#D85733',
+    inactiveTintColor: '#FFF1D3',          
+    style: {
+      backgroundColor: 'gray',
+    },
+    
   },
-  backgroundColor: '#008da8',
+  
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   animationEnabled: true,

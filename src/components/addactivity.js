@@ -25,6 +25,11 @@ const instructions = Platform.select({
 
 
 export default class Addactivity extends Component<> {
+  static navigationOptions = {
+    title: 'New Entry',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },};
   render() {
     return (
         <Container>
@@ -43,7 +48,7 @@ export default class Addactivity extends Component<> {
         </Header>
         <Form>
             <Item inlineLabel>
-              <Label>Username</Label>
+              <Label>Trip Name</Label>
               <Input />
             </Item>
             </Form>

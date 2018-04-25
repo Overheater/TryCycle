@@ -5,7 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
+import {TabNavigator,TabBarBottom, StackNavigator,NavigationActionStatusBar,navigationOptions } from 'react-navigation';
 import Styles from '../styles/Styles';
 
 const instructions = Platform.select({
@@ -17,6 +17,9 @@ const instructions = Platform.select({
 
 
 export default class Welcome extends Component<> {
+    static navigationOptions = {
+        title: 'Home',
+      };
   render() {
     return (
       <View style={Styles.container}>
