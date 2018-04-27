@@ -22,8 +22,26 @@ const instructions = Platform.select({
   android: 'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
-
-
+var Sound = require('react-native-sound');
+Sound.setCategory('Playback');
+var Ting = new Sound('ting.mp3', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load the sound', error);
+    return;
+  }
+  // loaded successfully
+  console.log('duration in seconds: ' + Ting.getDuration() + 'number of channels: ' + Ting.getNumberOfChannels());
+});
+Ting.play((success) => {
+  if (success) {
+    console.log('successfully finished playing');
+  } else {
+    console.log('playback failed due to audio decoding errors');
+    // reset the player to its uninitialized state (android only)
+    // this is the only option to recover after an error occured and use the player again
+    Ting.reset();
+  }
+});
 export default class Addactivity extends Component<> {
   static navigationOptions = {
     title: 'Carpooling',
