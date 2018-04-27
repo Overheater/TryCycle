@@ -1,10 +1,11 @@
 export class Trip {
-    constructor(id, name,date,type,picture,description) {
+    constructor(id, name,date,type,tripsSaved,description) {
         this.ID = id;
         this.Name = name;
         this.Date = date;
         this.Type = type;
-        this.Picture = picture;
+        this.TripsSaved=tripsSaved;
+       // this.Picture = picture;
         this.Description =description;
     }
 
@@ -21,9 +22,9 @@ export class Trip {
     getType() {
         return this.Type;
     }
-    getPicture() {
+   /* getPicture() {
         return this.Picture;
-    }
+    }*/
     getDescription() {
         return this.Description;
     }

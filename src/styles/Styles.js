@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
     },
     buttonBar:
     {
-      fontSize:15,
       display: 'flex',
-       flexDirection: 'column'
+       flexDirection: 'row',
+       padding: 5
 
     }
   });

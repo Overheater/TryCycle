@@ -6,15 +6,24 @@
 
 import React, { Component } from 'react';
 import {
+  Alert,
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
+  Keyboard,
+  TextInput,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  FlatList
 } from 'react-native';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,  Form, Item, Input, Label } from 'native-base';
+import store from 'react-native-simple-store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Styles from '../styles/Styles';
+import { Trip } from '../models/Trip';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -43,32 +52,72 @@ Ting.play((success) => {
   }
 });
 export default class Addactivity extends Component<> {
+  constructor(props)
+  {
+    super(props);
+    this.state = { Name: '',Description:'',Quantity:''};
+
+  }
+  createTrip(){
+    console.log("hey")
+    var Date1=new Date();
+    var listsize=null;
+    store
+    .get('Trips')
+    .then(
+          )
+          console.log(this.state.Name);
+          console.log({listsize});
+          console.log({Date1});
+          const Tripin =new Trip(this.state.Name,this.state.Name,Date1,"d",this.state.Quantity,this.state.Description)
+          console.log({Tripin});
+  store
+  .push('Trips',Tripin)
+  .then(store.get('Trips'))
+  .then(console.log)
+  Ting.play()
+
+  }
   static navigationOptions = {
     title: 'Carpooling',
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: 'rgb(0,141,168)',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
     },};
   render() {
     return (
       <Container>
-      <Form>
-          <Item floatingLabel>
-            <Label>Trip Name</Label>
-            <Input />
-          </Item>
-          </Form>
-          <Form>
-          <Item floatingLabel>
-            <Label>Description</Label>
-            <Input />
-          </Item>
-          </Form>
-          <Form>
-          <Item floatingLabel>
-            <Label>People in Carpool</Label>
-            <Input />
-          </Item>
-          </Form>
+        <TextInput
+          style={{width: 350,height: 55, borderBottomColor: Platform.OS === 'ios' ? 'black' : null, borderBottomWidth: Platform.OS === 'ios' ? 1 : null}}
+          placeholder='Trip Name'
+          returnKeyLabel="none"
+          value={this.state.Name}
+          onChangeText={(intext) => this.setState({Name:intext})}
+          />
+          <TextInput
+          style={{width: 350,height: 55, borderBottomColor: Platform.OS === 'ios' ? 'black' : null, borderBottomWidth: Platform.OS === 'ios' ? 1 : null}}
+          placeholder='Description'
+          returnKeyLabel="none"
+          value={this.state.Description}
+          onChangeText={(newtext) => this.setState({Description:newtext})}
+          />
+          <TextInput
+          style={{width: 350,height: 55, borderBottomColor: Platform.OS === 'ios' ? 'black' : null, borderBottomWidth: Platform.OS === 'ios' ? 1 : null}}
+          placeholder='How many errands did you complete?'
+          returnKeyLabel="none"
+          keyboardType="numeric"
+          value={this.state.Quantity}
+          onChangeText={(othertext) => this.setState({Quantity:othertext})}
+          />
+
+            <Button  full
+            onPress={() =>this.createTrip()}
+          >
+            <Text style={{color:"white"}}>submit</Text>
+        </Button> 
     </Container>
     );
   }

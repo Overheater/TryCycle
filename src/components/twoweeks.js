@@ -9,7 +9,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
 import Styles from '../styles/Styles';
@@ -23,6 +24,8 @@ const instructions = Platform.select({
 
 
 export default class Twoweeks extends Component<> {
+  componentDidMount = () ⇒ AsyncStorage.getItem('name').then((value) 
+  ⇒ this.setState({ 'name': value }))
   render() {
     return (
       <View style={Styles.container}>
