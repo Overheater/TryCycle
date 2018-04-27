@@ -24,8 +24,7 @@ const instructions = Platform.select({
 
 
 export default class Twoweeks extends Component<> {
-  componentDidMount = () ⇒ AsyncStorage.getItem('name').then((value) 
-  ⇒ this.setState({ 'name': value }))
+
   render() {
     return (
       <View style={Styles.container}>

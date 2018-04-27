@@ -20,7 +20,6 @@ import {
 } from 'react-native';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,  Form, Item, Input, Label } from 'native-base';
-import store from 'react-native-simple-store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Styles from '../styles/Styles';
 import { Trip } from '../models/Trip';
@@ -59,11 +58,11 @@ export default class Atransport extends Component<> {
     this.state = { Name: '',Description:'',Quantity:'',listsize:0};
 
   }
-  createTrip(){
+   /*createTrip(){
     console.log("hey")
     var Date1=new Date();
     
-    store.get('trips')
+   store.get('trips')
     .then((trips)=>this.state.listsize=trips.length()
           )
           console.log(this.state.Name);
@@ -74,6 +73,8 @@ export default class Atransport extends Component<> {
   store.push('trips',Tripin)
   .then(console.log)
   Ting.play()
+  }*/
+  donothing(){
 
   }
   static navigationOptions = {
@@ -113,7 +114,7 @@ export default class Atransport extends Component<> {
           />
 
             <Button  full
-            onPress={() =>this.createTrip()}
+            onPress={() =>this.donothing()}
           >
             <Text style={{color:"white"}}>submit</Text>
         </Button>  

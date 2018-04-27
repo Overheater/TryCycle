@@ -3,7 +3,8 @@ import {
   Platform,
   Alert,
   StyleSheet,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import {
   Body,
@@ -21,7 +22,6 @@ import {
 } from 'native-base';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationActionStatusBar,navigationOptions,NavigationAction } from 'react-navigation';
 import Styles from '../styles/Styles';
-import store from 'react-native-simple-store';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -43,18 +43,50 @@ export default class Welcome extends Component<> {
         },
       };
       componentWillMount(){
-        if(store.get('trips')===null){
-          console.log("trips isn't here")
-          store.save('trips',[])
-        }
-        Alert.alert(
+        
+        /*async(dispatch)=>{
+        try {
+           let value = await AsyncStorage.getItem('trips');
+           if (value !=null){
+             console.log("Array not found");
+            var trip=[];
+            const trips =JSON.stringify(trip);
+            return AsyncStorage.setItem("trips",trips)
+            .then(json => console.log('success!'))
+            .catch(error => console.log('error!'));
+          }
+           else {
+            console.log("Array found");
+            return AsyncStorage.getItem('trips')
+            .then(req => JSON.parse(req))
+            .then(json => console.log(json))
+            .catch(error => console.log('error!'));
+          }
+        } 
+        catch (error) {
+                  console.log("we have a problem with the trips array, fix it")
+                      }
+        }*/
+          AsyncStorage.getItem('trips')
+          .then((item) => {
+           if (item) {
+            console.log("Array found");
+                     }
+           else{
+            console.log("Array not found");
+            var trip=[];
+            const trips =JSON.stringify(trip);
+            return AsyncStorage.setItem("trips",trip)
+           }
+          });
+       /* Alert.alert(
           "extra feature",
           String("app uses sound effects to confirm new Trip"),
           [
             {text: 'OK', onPress: () => console.log('OK Pressed')},
           ],
           { cancelable: false }
-        );
+        );*/
       }
   render() {
     return (
