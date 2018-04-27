@@ -16,4 +16,11 @@ const styles = StyleSheet.create({
       color: '#333333',
       marginBottom: 5,
     },
+    buttonBar:
+    {
+      fontSize:15,
+      display: 'flex',
+       flexDirection: 'column'
+
+    }
   });

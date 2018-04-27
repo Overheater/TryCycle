@@ -39,15 +39,21 @@ export default class TripChaining extends Component<> {
     return (
         <Container>
         <Form>
-            <Item inlineLabel>
+            <Item floatingLabel>
               <Label>Trip Name</Label>
               <Input />
             </Item>
             </Form>
             <Form>
-            <Item inlineLabel>
+            <Item floatingLabel>
               <Label>Description</Label>
               <Input />
+            </Item>
+            </Form>
+            <Form >
+            <Item floatingLabel >
+              <Label>How many errands did you complete?</Label>
+              <Input  />
             </Item>
             </Form>
       </Container>

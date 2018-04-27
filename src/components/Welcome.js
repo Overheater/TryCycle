@@ -44,11 +44,30 @@ export default class Welcome extends Component<> {
       <Text>
         Please select one of the trip types below to start journaling.
       </Text>
-      <Button  large
+      <View style={Styles.buttonBar}>
+        <Button  large
             onPress={() =>this.props.navigation.navigate('TripChaining')}
           >
             <Text style={{color:"white"}}>Trip Chaining</Text>
-          </Button>         
+        </Button> 
+        <Button  large
+            onPress={() =>this.props.navigation.navigate('Carpooling')}
+          >
+            <Text style={{color:"white"}}>Carpool</Text>
+        </Button>  
+          </View >
+          <View style={Styles.buttonBar}>
+        <Button  large
+            onPress={() =>this.props.navigation.navigate('PublicTransport')}
+          >
+            <Text style={{color:"white"}}>Public Transport</Text>
+        </Button> 
+        <Button  large
+            onPress={() =>this.props.navigation.navigate('ActiveTransport')}
+          >
+            <Text style={{color:"white"}}>Active Transport</Text>
+        </Button>  
+          </View >     
       </Content>
       </Container>
     );

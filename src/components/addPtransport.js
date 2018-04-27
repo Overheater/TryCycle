@@ -26,39 +26,26 @@ const instructions = Platform.select({
 
 export default class Ptransport extends Component<> {
   static navigationOptions = {
-    title: 'New Entry',
+    title: 'PublicTransport',
     headerStyle: {
       backgroundColor: '#f4511e',
     },};
   render() {
     return (
-        <Container>
-        <Header>
-          <Left>
-          <Button transparent
-          
-          >
-              <Icon name='menu' />
-              
-            </Button>
-          </Left>
-          <Body>
-            <Title>Add a trip</Title>
-          </Body>
-        </Header>
-        <Form>
-            <Item inlineLabel>
-              <Label>Trip Name</Label>
-              <Input />
-            </Item>
-            </Form>
-            <Form>
-            <Item inlineLabel>
-              <Label>Description</Label>
-              <Input />
-            </Item>
-            </Form>
-      </Container>
+      <Container>
+      <Form>
+          <Item floatingLabel>
+            <Label>Trip Name</Label>
+            <Input />
+          </Item>
+          </Form>
+          <Form>
+          <Item floatingLabel>
+            <Label>Description</Label>
+            <Input />
+          </Item>
+          </Form>
+    </Container>
     );
   }
 }
