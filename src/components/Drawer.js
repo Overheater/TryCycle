@@ -13,6 +13,7 @@ import AddATransport from './addAtransport';
 import AddPTransport from './addPtransport';
 import AddCarpool from './addCarpool';
 import AddTripChaining from './addTripChaining';
+import About from './about';
 const HomePage = StackNavigator({
   Home: {
       screen: Welcome
@@ -29,6 +30,9 @@ const HomePage = StackNavigator({
   TripChaining: {
     screen: AddTripChaining
   },
+  About:{
+    screen: About
+  }
 })
 export const Tabs= TabNavigator({
   Home:{screen: HomePage},

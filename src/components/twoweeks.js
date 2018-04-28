@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from 'react-native';
 import {
   Body,
@@ -25,10 +26,12 @@ import {
   Icon,
   Left,
   Right,
-  Title
+  Title,
+  Toast 
 } from 'native-base';
-import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
+import {TabNavigator,TabBarBottom, StackNavigator,NavigationActionStatusBar,navigationOptions,NavigationAction } from 'react-navigation';
 import Styles from '../styles/Styles';
+import {Trip} from '../models/Trip';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -39,11 +42,34 @@ const instructions = Platform.select({
 
 
 export default class Twoweeks extends Component<> {
+  static navigationOptions = {
+    title: 'Journal',
+    headerStyle: {
+      backgroundColor: 'rgb(0,141,168)',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
   constructor(props)
   {
     super(props);
     this.state = { Data:null};
 
+  }
+  donothing(){
+
+  }
+  componentWillFocus(){
+    console.log("this is the welcome component");
+    AsyncStorage.getItem('trips')
+    .then((item) => {
+      console.log("this is in the async storage in  the journal");
+      console.log(JSON.parse(item));
+      this.setState({Data:(JSON.parse(item))})
+    }).catch(error=>console.log("error"));
+    console.log("this is the outside");
   }
   componentWillMount(){
     //push the array into a state variable then go from there to find it, like in the movie app
@@ -73,15 +99,9 @@ export default class Twoweeks extends Component<> {
     console.log("this is the welcome component");
     AsyncStorage.getItem('trips')
     .then((item) => {
-      console.log("this is in the async storage");
-      
-     if (item) {
-      console.log("Array found");
-      this.setState({data:(item.parse())})
-               }
-     else{
-      console.log("Array not found")
-     }
+      console.log("this is in the async storage in  the journal");
+      console.log(JSON.parse(item));
+      this.setState({Data:(JSON.parse(item))})
     }).catch(error=>console.log("error"));
     console.log("this is the outside");
  /* Alert.alert(
@@ -93,25 +113,36 @@ export default class Twoweeks extends Component<> {
     { cancelable: false }
   );*/
 }
+componentWillUpdate(){    
+  console.log("this is the welcome component");
+AsyncStorage.getItem('trips')
+.then((item) => {
+  console.log("this is in the async storage in  the journal");
+  console.log(JSON.parse(item));
+  this.setState({Data:(JSON.parse(item))})
+}).catch(error=>console.log("error"));
+console.log("this is the outside");
+}
 _renderTrips() {
-  AsyncStorage.getItem('trips')
-  .then((item) => {
+  console.log("in the renderTrips functions");
+  console.log(this.state.Data);
     return (<FlatList
-      data = {item}
-      keyExtractor = {(item, index) => item.title}
+      data = {this.state.Data}
+      extraData={this.state.Data}
+      keyExtractor = {(item, index) => item.name}
       renderItem={this._renderItem}
-    />)
-   })
+    />) 
 }
 
 _renderItem = ({item}) => {
+  console.log("in the render item function");
   return (
   <Card>
   <CardItem 
       button
-      onPress={()=>donothing()}
+      onPress={()=>this.deleteItem(item.ID)}
   >
-      <Text>{item.getName()}</Text>
+      <Text>{item.Name}</Text>
       <Right>
           <Icon name="ios-arrow-forward" />
       </Right>
@@ -119,13 +150,36 @@ _renderItem = ({item}) => {
 </Card>
   );
 }
-donothing(){
-    
+async deleteItem(value){
+  var starter = await AsyncStorage.getItem("trips")
+  .then((item) => {
+  var items = JSON.parse(item);
+  console.log(items);
+  for (var i =0; i< items.length; i++) {
+    var iteminquestion = items[i];
+    console.log(iteminquestion.ID);
+    console.log(value);
+    if (iteminquestion.ID == value) {
+        items.splice(i, 1);
+    }
+}
+this.setState({Data:(JSON.parse(newtrips))});
+newtrips = JSON.stringify(items);
+AsyncStorage.setItem("trips", newtrips);
+}).catch(error=>console.log("error"));
+
+  Toast.show({
+    text: "Trip Deleted!",
+    buttonText: "Okay",
+    duration: 3000
+  })
 }
   render() {
     return(
       <Container>
-        {this.state.data != null ? this._renderTrips() : <Text >Sacrificing to the movie God...</Text>}
+        <Content>
+        {this.state.Data != null ? this._renderTrips() : <Text >Sacrificing to the movie God...</Text>}
+        </Content>
     </Container>)
   }
 }

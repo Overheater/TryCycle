@@ -19,7 +19,7 @@ import {
   FlatList
 } from 'react-native';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
-import { Container, Header, Left, Body, Right, Button, Icon, Title,  Form, Item, Input, Label } from 'native-base';
+import { Container, Header,Footer, Left, Body, Right, Button, Icon, Title,  Form, Item, Input, Label } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Styles from '../styles/Styles';
 import { Trip } from '../models/Trip';
@@ -57,26 +57,25 @@ export default class Addactivity extends Component<> {
     this.state = { Name: '',Description:'',Quantity:''};
 
   }
-  /*createTrip(){
-    console.log("hey")
+  createTrip(){
+    console.log("hey");
     var Date1=new Date();
-    var listsize=null;
-    store
-    .get('Trips')
-    .then(
-          )
-          console.log(this.state.Name);
-          console.log({listsize});
-          console.log({Date1});
-          const Tripin =new Trip(this.state.Name,this.state.Name,Date1,"d",this.state.Quantity,this.state.Description)
-          console.log({Tripin});
-  store
-  .push('Trips',Tripin)
-  .then(store.get('Trips'))
-  .then(console.log)
-  Ting.play()
-
-  }*/
+    var listsize=0;
+    AsyncStorage.getItem('trips')
+  .then((trips) => {
+    const l = trips ? JSON.parse(trips) : [];
+    listsize=l.length;
+    console.log(listsize);
+    var tripin=new Trip((listsize+1),this.state.Name,Date1,"d",(this.state.Quantity)-1,this.state.Description);
+    l.push(tripin);
+    console.log({tripin});
+    AsyncStorage.setItem('trips', JSON.stringify(l));
+    this.props.navigation.navigate('Home');
+  });
+ console.log(this.state.Name);
+ console.log({Date1});
+  Ting.play();
+  }
   donothing(){
 
   }
@@ -88,7 +87,7 @@ export default class Addactivity extends Component<> {
     headerTintColor: '#fff',
     headerTitleStyle: {
       fontWeight: 'bold',
-    },};
+    },}
   render() {
     return (
       <Container>
@@ -98,28 +97,28 @@ export default class Addactivity extends Component<> {
           returnKeyLabel="none"
           value={this.state.Name}
           onChangeText={(intext) => this.setState({Name:intext})}
-          />
+          onSubmitEditing={()=>this.donothing()}/>
           <TextInput
           style={{width: 350,height: 55, borderBottomColor: Platform.OS === 'ios' ? 'black' : null, borderBottomWidth: Platform.OS === 'ios' ? 1 : null}}
           placeholder='Description'
           returnKeyLabel="none"
           value={this.state.Description}
           onChangeText={(newtext) => this.setState({Description:newtext})}
-          />
+          onSubmitEditing={()=>this.donothing()}/>
           <TextInput
           style={{width: 350,height: 55, borderBottomColor: Platform.OS === 'ios' ? 'black' : null, borderBottomWidth: Platform.OS === 'ios' ? 1 : null}}
-          placeholder='How many errands did you complete?'
+          placeholder='How many people were in the car?'
           returnKeyLabel="none"
           keyboardType="numeric"
           value={this.state.Quantity}
           onChangeText={(othertext) => this.setState({Quantity:othertext})}
-          />
+          onSubmitEditing={()=>this.donothing()}/>
 
             <Button  full
             onPress={() =>this.createTrip()}
           >
             <Text style={{color:"white"}}>submit</Text>
-        </Button> 
+        </Button>  
     </Container>
     );
   }

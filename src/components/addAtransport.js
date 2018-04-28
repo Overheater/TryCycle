@@ -21,7 +21,6 @@ import {
 } from 'react-native';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,  Form, Item, Input, Label } from 'native-base';
-import store from 'react-native-simple-store';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Styles from '../styles/Styles';
 import { Trip } from '../models/Trip';
@@ -61,21 +60,23 @@ export default class Atransport extends Component<> {
 
   }
   createTrip(){
-    console.log("hey")
+    console.log("hey");
     var Date1=new Date();
-    
-    store.get('trips')
-    .then((trips)=>this.state.listsize=trips.length()
-          )
-          console.log(this.state.Name);
-          console.log(this.state.listsize);
-          console.log({Date1});
-          const Tripin =new Trip((this.state.listsize+1),this.state.Name,Date1,"c",this.state.Quantity,this.state.Description)
-          console.log({Tripin});
-  store.push('trips',Tripin)
-  .then(console.log)
-  Ting.play()
-
+    var listsize=0;
+    AsyncStorage.getItem('lists')
+  .then((lists) => {
+    const l = lists ? JSON.parse(lists) : [];
+    listsize=l.length;
+    console.log(listsize);
+    var tripin=new Trip((listsize+1),this.state.Name,Date1,"c",this.state.Quantity,this.state.Description);
+    l.push(tripin);
+    console.log({tripin});
+    AsyncStorage.setItem('lists', JSON.stringify(l));
+    this.props.navigation.navigate('Home');
+  });
+ console.log(this.state.Name);
+ console.log({Date1});
+  Ting.play();
   }
   static navigationOptions = {
     title: 'ActiveTransport',

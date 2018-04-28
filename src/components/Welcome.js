@@ -34,6 +34,12 @@ const instructions = Platform.select({
 export default class Welcome extends Component<> {
     static navigationOptions = {
         title: 'Home',
+        headerRight: (
+          <Button
+            onPress={() => this.props.navigation.navigate('About')}
+            title="Info"
+            color="#fff"
+          />),
         headerStyle: {
           backgroundColor: 'rgb(0,141,168)',
         },
@@ -102,24 +108,24 @@ export default class Welcome extends Component<> {
         Please select one of the trip types below to start journaling.
       </Text>
       <View style={Styles.buttonBar}>
-        <Button  full
+        <Button  full style={{padding:5}}
             onPress={() =>this.props.navigation.navigate('TripChaining')}
           >
             <Text style={{color:"white"}}>Trip Chaining</Text>
         </Button> 
-        <Button  full
+        <Button  full style={{padding:5}}
             onPress={() =>this.props.navigation.navigate('Carpool')}
           >
             <Text style={{color:"white"}}>Carpool</Text>
         </Button>  
           </View >
           <View style={Styles.buttonBar}>
-        <Button  full
+        <Button  full style={{padding:5}}
             onPress={() =>this.props.navigation.navigate('PTransport')}
           >
             <Text style={{color:"white"}}>Public Transport</Text>
         </Button> 
-        <Button  full
+        <Button  full style={{padding:5}}
             onPress={() =>this.props.navigation.navigate('ATransport')}
           >
             <Text style={{color:"white"}}>Active Transport</Text>

@@ -64,15 +64,15 @@ export default class TripChaining extends Component<> {
     console.log("hey");
     var Date1=new Date();
     var listsize=0;
-    AsyncStorage.getItem('lists')
-  .then((lists) => {
-    const l = lists ? JSON.parse(lists) : [];
+    AsyncStorage.getItem('trips')
+  .then((trips) => {
+    const l = trips ? JSON.parse(trips) : [];
     listsize=l.length;
     console.log(listsize);
-    var tripin=new Trip((listsize+1),this.state.Name,Date1,"a",this.state.Quantity,this.state.Description);
+    var tripin=new Trip((listsize+1),this.state.Name,Date1,"a",(this.state.Quantity)-1,this.state.Description);
     l.push(tripin);
     console.log({tripin});
-    AsyncStorage.setItem('lists', JSON.stringify(l));
+    AsyncStorage.setItem('trips', JSON.stringify(l));
     this.props.navigation.navigate('Home');
   });
  console.log(this.state.Name);
