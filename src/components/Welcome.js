@@ -42,8 +42,7 @@ export default class Welcome extends Component<> {
           fontWeight: 'bold',
         },
       };
-      componentWillMount(){
-        
+      componentDidMount(){
         /*async(dispatch)=>{
         try {
            let value = await AsyncStorage.getItem('trips');
@@ -67,8 +66,10 @@ export default class Welcome extends Component<> {
                   console.log("we have a problem with the trips array, fix it")
                       }
         }*/
+        console.log("this is the welcome component");
           AsyncStorage.getItem('trips')
           .then((item) => {
+            console.log("this is in the async storage");
            if (item) {
             console.log("Array found");
                      }
@@ -76,9 +77,10 @@ export default class Welcome extends Component<> {
             console.log("Array not found");
             var trip=[];
             const trips =JSON.stringify(trip);
-            return AsyncStorage.setItem("trips",trip)
+            return AsyncStorage.setItem("trips",trips)
            }
-          });
+          }).catch(error=>console.log("error"));
+          console.log("this is the outside");
        /* Alert.alert(
           "extra feature",
           String("app uses sound effects to confirm new Trip"),

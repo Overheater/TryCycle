@@ -16,7 +16,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  FlatList
+  FlatList,
+  AsyncStorage
 } from 'react-native';
 import {TabNavigator,TabBarBottom, StackNavigator,NavigationAction} from 'react-navigation';
 import { Container, Header, Left, Body, Right, Button, Icon, Title,  Form, Item, Input, Label } from 'native-base';
@@ -59,25 +60,25 @@ export default class TripChaining extends Component<> {
     this.state = { Name: '',Description:'',Quantity:''};
 
   }
- /* createTrip(){
-    console.log("hey")
+  createTrip(){
+    console.log("hey");
     var Date1=new Date();
     var listsize=0;
-    store.get('Trips')
-    .then((res)=>listsize=+1,
-          )
-          console.log(this.state.Name);
-          console.log({listsize});
-          console.log({Date1});
-          const Tripin =new Trip((listsize+1),this.state.Name,Date1,"a",this.state.Quantity,this.state.Description)
-          console.log({Tripin});
-  store
-  .push('Trips',Tripin)
-  .then(store.get('Trips'))
-  .then(console.log)
-  Ting.play()
-
-  }*/
+    AsyncStorage.getItem('lists')
+  .then((lists) => {
+    const l = lists ? JSON.parse(lists) : [];
+    listsize=l.length;
+    console.log(listsize);
+    var tripin=new Trip((listsize+1),this.state.Name,Date1,"a",this.state.Quantity,this.state.Description);
+    l.push(tripin);
+    console.log({tripin});
+    AsyncStorage.setItem('lists', JSON.stringify(l));
+    this.props.navigation.navigate('Home');
+  });
+ console.log(this.state.Name);
+ console.log({Date1});
+  Ting.play();
+  }
   donothing(){
     
   }
@@ -118,7 +119,7 @@ export default class TripChaining extends Component<> {
           onSubmitEditing={()=>this.donothing()}/>
 
             <Button  full
-            onPress={() =>this.donothing()}
+            onPress={() =>this.createTrip()}
           >
             <Text style={{color:"white"}}>submit</Text>
         </Button>  
