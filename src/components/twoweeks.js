@@ -61,16 +61,7 @@ export default class Twoweeks extends Component<> {
   donothing(){
 
   }
-  componentWillFocus(){
-    console.log("this is the welcome component");
-    AsyncStorage.getItem('trips')
-    .then((item) => {
-      console.log("this is in the async storage in  the journal");
-      console.log(JSON.parse(item));
-      this.setState({Data:(JSON.parse(item))})
-    }).catch(error=>console.log("error"));
-    console.log("this is the outside");
-  }
+
   componentWillMount(){
 
     console.log("this is the welcome component");
@@ -83,16 +74,7 @@ export default class Twoweeks extends Component<> {
     console.log("this is the outside");
 
 }
-componentWillUpdate(){    
-  console.log("this is the welcome component");
-AsyncStorage.getItem('trips')
-.then((item) => {
-  console.log("this is in the async storage in  the journal");
-  console.log(JSON.parse(item));
-  this.setState({Data:(JSON.parse(item))})
-}).catch(error=>console.log("error"));
-console.log("this is the outside");
-}
+
 _renderTrips() {
   console.log("in the renderTrips functions");
   console.log(this.state.Data);
@@ -114,13 +96,13 @@ _renderItem = ({item}) => {
   >
       <Text>{item.Name}</Text>
       <Right>
-          <Icon name="ios-arrow-forward" />
+          <Icon name="md-trash"/>
       </Right>
   </CardItem>
 </Card>
   );
 }
-async deleteItem(value){
+ async deleteItem(value){
   var starter = await AsyncStorage.getItem("trips")
   .then((item) => {
   var items = JSON.parse(item);
@@ -133,8 +115,9 @@ async deleteItem(value){
         items.splice(i, 1);
     }
 }
-this.setState({Data:(JSON.parse(newtrips))});
+
 newtrips = JSON.stringify(items);
+this.setState({Data:(JSON.parse(newtrips))});
 AsyncStorage.setItem("trips", newtrips);
 }).catch(error=>console.log("error"));
 }
@@ -142,7 +125,7 @@ AsyncStorage.setItem("trips", newtrips);
     return(
       <Container>
         <Content>
-        {this.state.Data != null ? this._renderTrips() : <Text >Sacrificing to the movie God...</Text>}
+        {this.state.Data != null ? this._renderTrips() : <Text >Your on phone data does not work.. your phone is probably Android 7.0 or above</Text>}
         </Content>
     </Container>)
   }
