@@ -72,30 +72,7 @@ export default class Twoweeks extends Component<> {
     console.log("this is the outside");
   }
   componentWillMount(){
-    //push the array into a state variable then go from there to find it, like in the movie app
-    /*async(dispatch)=>{
-    try {
-       let value = await AsyncStorage.getItem('trips');
-       if (value !=null){
-         console.log("Array not found");
-        var trip=[];
-        const trips =JSON.stringify(trip);
-        return AsyncStorage.setItem("trips",trips)
-        .then(json => console.log('success!'))
-        .catch(error => console.log('error!'));
-      }
-       else {
-        console.log("Array found");
-        return AsyncStorage.getItem('trips')
-        .then(req => JSON.parse(req))
-        .then(json => console.log(json))
-        .catch(error => console.log('error!'));
-      }
-    } 
-    catch (error) {
-              console.log("we have a problem with the trips array, fix it")
-                  }
-    }*/
+
     console.log("this is the welcome component");
     AsyncStorage.getItem('trips')
     .then((item) => {
@@ -104,14 +81,7 @@ export default class Twoweeks extends Component<> {
       this.setState({Data:(JSON.parse(item))})
     }).catch(error=>console.log("error"));
     console.log("this is the outside");
- /* Alert.alert(
-    "extra feature",
-    String("app uses sound effects to confirm new Trip"),
-    [
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ],
-    { cancelable: false }
-  );*/
+
 }
 componentWillUpdate(){    
   console.log("this is the welcome component");

@@ -5,6 +5,7 @@ export class Trip {
         this.Date = date;
         this.Type = type;
         this.TripsSaved=tripsSaved;
+        //Pictures were never implemented due to the  library killing my project twice
        // this.Picture = picture;
         this.Description =description;
     }
