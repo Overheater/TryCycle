@@ -69,6 +69,8 @@ export default class TripChaining extends Component<> {
     const l = trips ? JSON.parse(trips) : [];
     listsize=l.length;
     console.log(listsize);
+        //trip chaining saves all potential trips except the first one
+
     var tripin=new Trip((listsize+1),this.state.Name,Date1,"a",(this.state.Quantity)-1,this.state.Description);
     l.push(tripin);
     console.log({tripin});

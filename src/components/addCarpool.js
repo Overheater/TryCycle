@@ -66,7 +66,9 @@ export default class Addactivity extends Component<> {
     const l = trips ? JSON.parse(trips) : [];
     listsize=l.length;
     console.log(listsize);
-    var tripin=new Trip((listsize+1),this.state.Name,Date1,"d",(this.state.Quantity)-1,this.state.Description);
+            //carpooling saves everybody a trip except the driver
+
+    var tripin=new Trip((listsize+1),this.state.Name,Date1,"b",(this.state.Quantity)-1,this.state.Description);
     l.push(tripin);
     console.log({tripin});
     AsyncStorage.setItem('trips', JSON.stringify(l));

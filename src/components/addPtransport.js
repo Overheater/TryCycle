@@ -59,25 +59,26 @@ export default class Ptransport extends Component<> {
     this.state = { Name: '',Description:'',Quantity:''};
 
   }
-  /*createTrip(){
-    console.log("hey")
+  createTrip(){
+    console.log("hey");
     var Date1=new Date();
     var listsize=0;
-    store.get('Trips')
-    .then((res)=>listsize=+1,
-          )
-          console.log(this.state.Name);
-          console.log({listsize});
-          console.log({Date1});
-          const Tripin =new Trip((listsize+1),this.state.Name,Date1,"b",this.state.Quantity,this.state.Description)
-          console.log({Tripin});
-  store
-  .push('Trips',Tripin)
-  .then(store.get('Trips'))
-  .then(console.log)
-  Ting.play()
-
-  }*/
+    AsyncStorage.getItem('trips')
+  .then((trips) => {
+    const l = trips ? JSON.parse(trips) : [];
+    listsize=l.length;
+    console.log(listsize);
+    //public transoprt  saves all potential trips
+    var tripin=new Trip((listsize+1),this.state.Name,Date1,"d",(this.state.Quantity),this.state.Description);
+    l.push(tripin);
+    console.log({tripin});
+    AsyncStorage.setItem('trips', JSON.stringify(l));
+    this.props.navigation.navigate('Home');
+  });
+ console.log(this.state.Name);
+ console.log({Date1});
+  Ting.play();
+  }
   donothing(){
 
   }

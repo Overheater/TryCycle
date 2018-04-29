@@ -130,6 +130,16 @@ export default class Welcome extends Component<> {
           >
             <Text style={{color:"white"}}>Active Transport</Text>
         </Button>  
+        <Button  full style={{padding:5}}
+            onPress={() =>this.props.navigation.navigate('About')}
+          >
+            <Text style={{color:"white"}}>About</Text>
+        </Button> 
+        <Button  full style={{padding:5}}
+            onPress={() =>this.props.navigation.navigate('Achievement')}
+          >
+            <Text style={{color:"white"}}>Achievements</Text>
+        </Button> 
           </View >     
       </Content>
       </Container>

@@ -30,10 +30,11 @@ export default class Twoweeks extends Component<> {
       };
       render() {
         return (
+          <View style={Styles.Container}>
 <Text style={Styles.welcome}>Trycycle</Text>
 <Text style={Styles.welcome}>Made By Ian Pougher</Text>
 <Text style={Styles.welcome}>The Extra feature is sound effects, they play when a new trip is added</Text>
-
+</View>
         )
     }
     

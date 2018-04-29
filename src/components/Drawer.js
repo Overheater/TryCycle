@@ -14,6 +14,7 @@ import AddPTransport from './addPtransport';
 import AddCarpool from './addCarpool';
 import AddTripChaining from './addTripChaining';
 import About from './about';
+import Achievement from './Acievements'
 const HomePage = StackNavigator({
   Home: {
       screen: Welcome
@@ -32,6 +33,9 @@ const HomePage = StackNavigator({
   },
   About:{
     screen: About
+  },
+  Achievement:{
+    screen: Achievement
   }
 })
 export const Tabs= TabNavigator({

@@ -167,12 +167,6 @@ this.setState({Data:(JSON.parse(newtrips))});
 newtrips = JSON.stringify(items);
 AsyncStorage.setItem("trips", newtrips);
 }).catch(error=>console.log("error"));
-
-  Toast.show({
-    text: "Trip Deleted!",
-    buttonText: "Okay",
-    duration: 3000
-  })
 }
   render() {
     return(

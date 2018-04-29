@@ -68,6 +68,8 @@ export default class Atransport extends Component<> {
     const l = lists ? JSON.parse(lists) : [];
     listsize=l.length;
     console.log(listsize);
+        //active transoprt  saves all potential trips
+
     var tripin=new Trip((listsize+1),this.state.Name,Date1,"c",this.state.Quantity,this.state.Description);
     l.push(tripin);
     console.log({tripin});
