@@ -11,6 +11,16 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       margin: 10,
     },
+    achievementtext: {
+      fontSize: 25,
+      textAlign: 'center',
+      margin: 10,
+    },
+    achievementinfo: {
+      fontSize: 10,
+      textAlign: 'center',
+      margin: 10,
+    },
     instructions: {
       textAlign: 'center',
       color: '#333333',
